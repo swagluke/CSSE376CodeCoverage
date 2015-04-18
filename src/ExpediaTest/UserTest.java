@@ -33,6 +33,22 @@ public class UserTest
 		assertEquals(1024.65,this.target.Price(), 0.01);
 	}
 	@Test
+	public void TestThatDiscountInitializesCover2()
+	{
+		Discount target = new Discount(1, 999999999);
+		ServiceLocator.Instance().AddDiscount(target);
+		this.target.book(new Booking[]{new Flight(StartDate, EndDate, 100), new Hotel(5), new Car(3)});
+		assertEquals(1035,this.target.Price(), 0.01);
+	}
+	@Test
+	public void TestThatDiscountInitializesCover3()
+	{
+		Discount target = new Discount(-99, 1);
+		ServiceLocator.Instance().AddDiscount(target);
+		this.target.book(new Booking[]{new Flight(StartDate, EndDate, 100), new Hotel(5), new Car(3)});
+		assertEquals(1035,this.target.Price(), 0.01);
+	}
+	@Test
 	public void TestThatUserInitializes()
 	{
 		Assert.assertEquals("Bob Dole", target.Name);
